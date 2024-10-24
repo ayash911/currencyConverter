@@ -1,5 +1,4 @@
-const api_url =
-  "https://openexchangerates.org/api/latest.json?app_id=f143475d602947aab7696546236a4df8";
+const api_url = "https://openexchangerates.org/api/latest.json?app_id=f143475d602947aab7696546236a4df8";
 let data = {};
 let currencySymbols = {};
 const container = document.getElementById("cont");
@@ -18,22 +17,18 @@ async function logMessage(message) {
   }
 }
 
-// Example usage:
-logMessage("Currency rates fetched successfully.");
-
+// Fetch currency rates
 async function fetchRates() {
   try {
     const response = await fetch(api_url);
     data = await response.json();
-    let currentTime = new Date();
-    await logMessage(`RATES FETCHED AT ${currentTime}`);
+    await logMessage(`RATES FETCHED AT ${new Date()}`);
   } catch (error) {
     await logMessage(`Error fetching exchange rates: ${error}`);
   }
 }
 
-fetchRates();
-
+// Fetch currency symbols
 async function fetchCurrencySymbols() {
   try {
     const response = await fetch("./assets/symbols.json");
@@ -45,9 +40,10 @@ async function fetchCurrencySymbols() {
   }
 }
 
+// Fetch currency data
 async function fetchCurrencies() {
   try {
-    const response = await fetch("./assets/currencies.json ");
+    const response = await fetch("./assets/currencies.json");
     if (response.ok) {
       const currenciesData = await response.json();
       populateDropdowns(currenciesData);
@@ -57,6 +53,7 @@ async function fetchCurrencies() {
   }
 }
 
+// Populate currency dropdowns
 function populateDropdowns(currencies) {
   const fromCurrency = document.getElementById("fromCurrency");
   const toCurrency = document.getElementById("toCurrency");
@@ -71,26 +68,20 @@ function populateDropdowns(currencies) {
     fromCurrency.appendChild(option.cloneNode(true));
     toCurrency.appendChild(option);
   });
-
-  let currentTime2 = new Date();
-  logMessage(`CURRENCY SYMBOLS POPULATED AT ${currentTime2}`);
 }
 
+// Update the displayed currency symbol
 function updateCurrencySymbol() {
   const selectedCurrency = document.getElementById("fromCurrency").value;
   const symbolDisplay = document.querySelector(".symbol");
   symbolDisplay.textContent = currencySymbols[selectedCurrency] || "";
-  let currentTime2 = new Date();
-  logMessage(`UPDATED CURRENCY SYMBOLS AT ${currentTime2}`);
 }
 
+// Swap currencies
 function swapCurrencies() {
   const fromCurrency = document.getElementById("fromCurrency");
   const toCurrency = document.getElementById("toCurrency");
-  [fromCurrency.value, toCurrency.value] = [
-    toCurrency.value,
-    fromCurrency.value,
-  ];
+  [fromCurrency.value, toCurrency.value] = [toCurrency.value, fromCurrency.value];
 
   const img = document.querySelector("img");
   img.style.transform = "rotate(180deg)";
@@ -102,11 +93,7 @@ function swapCurrencies() {
   }, 300);
 }
 
-document.querySelector("img").addEventListener("click", swapCurrencies);
-document
-  .getElementById("fromCurrency")
-  .addEventListener("change", updateCurrencySymbol);
-
+// Convert currency
 async function convertCurrency() {
   const amount = parseFloat(document.getElementById("amount").value);
   const fromCurrencyValue = document.getElementById("fromCurrency").value;
@@ -126,9 +113,7 @@ async function convertCurrency() {
   }
 
   const convertedAmount = ((amount * toRate) / fromRate).toFixed(3);
-  document.getElementById(
-    "result"
-  ).textContent = `${amount} ${fromCurrencyValue} = ${convertedAmount} ${toCurrencyValue}`;
+  document.getElementById("result").textContent = `${amount} ${fromCurrencyValue} = ${convertedAmount} ${toCurrencyValue}`;
   const liveTime = new Date(data.timestamp * 1000).toLocaleTimeString("en-IN", {
     timeZone: "Asia/Kolkata",
     hour: "numeric",
@@ -136,17 +121,15 @@ async function convertCurrency() {
     hour12: true,
   });
 
-  document.getElementById(
-    "rate"
-  ).textContent = `Live rate as of ${liveTime} IST`;
-
-  document.getElementById("rate2").textContent = `1 ${fromCurrencyValue} = ${(
-    toRate / fromRate
-  ).toFixed(3)} ${toCurrencyValue}`;
-
-  let currentTime2 = new Date();
-  logMessage(`CURRENCY SYMBOLS POPULATED AT ${currentTime2}`);
+  document.getElementById("rate").textContent = `Live rate as of ${liveTime} IST`;
+  document.getElementById("rate2").textContent = `1 ${fromCurrencyValue} = ${(toRate / fromRate).toFixed(3)} ${toCurrencyValue}`;
 }
 
+// Add event listeners
+document.querySelector("img").addEventListener("click", swapCurrencies);
+document.getElementById("fromCurrency").addEventListener("change", updateCurrencySymbol);
+
+// Initial fetches
 fetchCurrencies();
 fetchCurrencySymbols();
+fetchRates();
