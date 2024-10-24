@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+GB+S&display=swap");
+
+* {
+  margin: 0;
+  font-family: "Playwrite GB S", serif;
+  overflow: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.head {
+  padding: 15px;
+  font-weight: bolder;
+  background-color: rgb(0, 255, 204);
+  font-size: xx-large;
+  width: 100%;
+  text-align: center;
+}
+
+.converter-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center elements vertically */
+  margin-top: 20px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Set a max width for larger screens */
+}
+
+.amount-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.amount-container input {
+  padding-left: 40px;
+}
+
+.symbol {
+  position: absolute;
+  left: 10px;
+  font-size: 18px;
+  color: #666;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+select,
+input[type="number"] {
+  margin: 10px 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+img {
+  padding: 10px;
+  height: 30px;
+  width: 30px;
+  padding-bottom: 0px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+input[type="number"] {
+  width: 150px;
+}
+
+button {
+  margin-bottom: 20px;
+  padding: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(7, 225, 181);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: rgb(0, 170, 122);
+}
+
+#amount {
+  margin: 10px 0px;
+}
+
+#result,
+#rate,
+#rate2 {
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.result {
+  background-color: #cbc6c6;
+  padding: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  text-align: center;
+}
+
+@media (max-width: 1060px) {
+  .converter-container {
+    width: 95%; /* Adjust width for smaller screens */
+  }
+
+  .amount-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .dropdown-container {
+    flex-direction: row; /* Keep dropdowns in a row */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping if space is limited */
+  }
+
+  select,
+  input[type="number"],
+  button {
+    width: 100%; /* Full width for inputs and buttons */
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px; /* Slightly smaller font */
+  }
+
+  button {
+    width: 80%; /* Adjust button width */
+    padding: 15px; /* Adjust button padding */
+  }
+
+  img {
+    height: 25px; /* Smaller icon size */
+    width: 25px;
+    rotate: 90deg;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #result,
+  #rate,
+  #rate2 {
+    font-weight: bolder;
+    font-size: large; /* Smaller font size for results */
+  }
+
+  .result {
+    width: 90%; /* Full width on smaller screens */
+    padding: 15px; /* Add padding for better appearance */
+  }
+}
+
+footer {
+  background-color: #ffffff;
+  padding: 15px 20px;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  position: relative;
+}
+
+.footer-content {
+  font-size: 14px;
+  color: #333;
+}
+
+.footer-content a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
