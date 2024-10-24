@@ -5,6 +5,18 @@ const os = require("os");
 const app = express();
 const port = 3000;
 
+var winston = require('winston');
+var {Loggly} = require('winston-loggly-bulk');
+
+winston.add(new Loggly({
+    token: "7080c1dc-be9c-4ae1-b840-c2edb5960ca4",
+    subdomain: "ayash9111",
+    tags: ["Winston-NodeJS"],
+    json: true
+}));
+
+winston.log('info', "Hello World from Node.js!");
+
 app.use(express.static(path.join(__dirname)));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/image", express.static(path.join(__dirname, "image")));

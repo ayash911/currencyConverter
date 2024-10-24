@@ -11,6 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.1",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "loggly": "^1.1.1",
+    "winston": "^3.15.0",
+    "winston-loggly-bulk": "^3.3.2"
   }
 }

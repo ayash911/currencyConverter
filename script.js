@@ -5,21 +5,36 @@ let currencySymbols = {};
 const container = document.getElementById("cont");
 
 async function logMessage(message) {
-  try {
-    await fetch("/log", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    });
-  } catch (error) {
-    console.error("Error logging message:", error);
-  }
-}
+  const logToLocal = async () => {
+    try {
+      await fetch("/log", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+    } catch (error) {
+      console.error("Error logging message locally:", error);
+    }
+  };
 
-// Example usage:
-logMessage("Currency rates fetched successfully.");
+  const logToExternalService = async () => {
+    try {
+      await fetch("YOUR_EXTERNAL_LOGGING_SERVICE_URL", { // Replace with the external logging service URL
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+    } catch (error) {
+      console.error("Error logging to external service:", error);
+    }
+  };
+
+  await Promise.all([logToLocal(), logToExternalService()]);
+}
 
 async function fetchRates() {
   try {
@@ -39,21 +54,22 @@ async function fetchCurrencySymbols() {
     const response = await fetch("./assets/symbols.json");
     if (response.ok) {
       currencySymbols = await response.json();
+      await logMessage("Currency symbols fetched successfully.");
     }
   } catch (error) {
-    console.error("Error fetching currency symbols:", error);
+    await logMessage(`Error fetching currency symbols: ${error}`);
   }
 }
 
 async function fetchCurrencies() {
   try {
-    const response = await fetch("./assets/currencies.json ");
+    const response = await fetch("./assets/currencies.json");
     if (response.ok) {
       const currenciesData = await response.json();
       populateDropdowns(currenciesData);
     }
   } catch (error) {
-    console.error("Error fetching currency data:", error);
+    await logMessage(`Error fetching currency data: ${error}`);
   }
 }
 
@@ -145,7 +161,7 @@ async function convertCurrency() {
   ).toFixed(3)} ${toCurrencyValue}`;
 
   let currentTime2 = new Date();
-  logMessage(`CURRENCY SYMBOLS POPULATED AT ${currentTime2}`);
+  logMessage(`CONVERSION DONE AT ${currentTime2}`);
 }
 
 fetchCurrencies();
