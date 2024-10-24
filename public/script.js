@@ -36,7 +36,7 @@ fetchRates();
 
 async function fetchCurrencySymbols() {
   try {
-    const response = await fetch("/assets/symbols");
+    const response = await fetch("./assets/symbols.json");
     if (response.ok) {
       currencySymbols = await response.json();
     }
@@ -47,7 +47,7 @@ async function fetchCurrencySymbols() {
 
 async function fetchCurrencies() {
   try {
-    const response = await fetch("/assets/currencies");
+    const response = await fetch("./assets/currencies.json ");
     if (response.ok) {
       const currenciesData = await response.json();
       populateDropdowns(currenciesData);
