@@ -6,16 +6,19 @@ const container = document.getElementById("cont");
 
 async function logMessage(message) {
   const logToLocal = async () => {
-    try {
-      await fetch("/log", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message }),
-      });
-    } catch (error) {
-      console.error("Error logging message locally:", error);
+    if (window.location.hostname === "localhost") {
+      console.log("local");
+      try {
+        await fetch("/log", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message }),
+        });
+      } catch (error) {
+        console.error("Error logging message locally:", error);
+      }
     }
   };
 
@@ -26,13 +29,16 @@ async function logMessage(message) {
         token: "7080c1dc-be9c-4ae1-b840-c2edb5960ca4",
         tags: ["Winston-NodeJS"],
       };
-      await fetch("https://logs-01.loggly.com/inputs/7080c1dc-be9c-4ae1-b840-c2edb5960ca4/tag/Winston-NodeJS/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(logglyData),
-      });
+      await fetch(
+        "https://logs-01.loggly.com/inputs/7080c1dc-be9c-4ae1-b840-c2edb5960ca4/tag/Winston-NodeJS/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(logglyData),
+        }
+      );
     } catch (error) {
       console.error("Error logging to Loggly:", error);
     }
