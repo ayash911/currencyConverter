@@ -19,21 +19,26 @@ async function logMessage(message) {
     }
   };
 
-  const logToExternalService = async () => {
+  const logToLoggly = async () => {
     try {
-      await fetch("YOUR_EXTERNAL_LOGGING_SERVICE_URL", { // Replace with the external logging service URL
+      const logglyData = {
+        message: message,
+        token: "7080c1dc-be9c-4ae1-b840-c2edb5960ca4",
+        tags: ["Winston-NodeJS"],
+      };
+      await fetch("https://logs-01.loggly.com/inputs/7080c1dc-be9c-4ae1-b840-c2edb5960ca4/tag/Winston-NodeJS/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify(logglyData),
       });
     } catch (error) {
-      console.error("Error logging to external service:", error);
+      console.error("Error logging to Loggly:", error);
     }
   };
 
-  await Promise.all([logToLocal(), logToExternalService()]);
+  await Promise.all([logToLocal(), logToLoggly()]);
 }
 
 async function fetchRates() {
