@@ -26,7 +26,7 @@ body {
 .head {
   padding: 15px;
   font-weight: bolder;
-  background-color: rgb(0, 255, 204);
+  background-color: #4CAF50;
   font-size: xx-large;
   width: 100%;
   text-align: center;
@@ -37,13 +37,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center elements vertically */
+  justify-content: center;
   margin-top: 20px;
   padding: 20px;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 90%; /* Set a max width for larger screens */
+  width: 90%; 
 }
 
 .amount-container {
@@ -99,7 +99,7 @@ button {
   padding: 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: rgb(7, 225, 181);
+  background-color: #4CAF50;
   border: none;
   border-radius: 5px;
   color: white;
