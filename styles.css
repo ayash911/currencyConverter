@@ -10,6 +10,11 @@ html {
   height: 100%;
 }
 
+#more {
+  height: 20px;
+  width: 20px;
+}
+
 body {
   height: 100%;
   display: flex;
@@ -127,7 +132,7 @@ button:hover {
 
 @media (max-width: 1060px) {
   .converter-container {
-    width: 95%; /* Adjust width for smaller screens */
+    width: 95%;
   }
 
   .amount-container {
@@ -136,27 +141,27 @@ button:hover {
   }
 
   .dropdown-container {
-    flex-direction: row; /* Keep dropdowns in a row */
+    flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping if space is limited */
+    flex-wrap: wrap;
   }
 
   select,
   input[type="number"],
   button {
-    width: 100%; /* Full width for inputs and buttons */
+    width: 100%;
     margin: 10px 0;
     text-align: center;
-    font-size: 14px; /* Slightly smaller font */
+    font-size: 14px;
   }
 
   button {
-    width: 80%; /* Adjust button width */
-    padding: 15px; /* Adjust button padding */
+    width: 80%;
+    padding: 15px;
   }
 
   img {
-    height: 25px; /* Smaller icon size */
+    height: 25px;
     width: 25px;
     rotate: 90deg;
     display: block;
@@ -167,12 +172,18 @@ button:hover {
   #rate,
   #rate2 {
     font-weight: bolder;
-    font-size: large; /* Smaller font size for results */
+    font-size: large;
   }
 
   .result {
-    width: 90%; /* Full width on smaller screens */
-    padding: 15px; /* Add padding for better appearance */
+    width: 90%;
+    padding: 15px; 
+  }
+  #more{
+    height: 15px;
+    width: 15px;
+    rotate: 0deg;
+    padding: 5px;
   }
 }
 
